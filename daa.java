@@ -1,40 +1,39 @@
-package ada;
 import java.util.Scanner;
-public class Knapsack
-{
-public static void main(String[] args)
-{
-Scanner in = new Scanner(System.in);
+class Knapsack {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
 int i;
-System.out.println("********* KNAPSACK PROBLEM *******");
-System.out.println("Enter the total number of items: ");
+
+System.out.println("Enter the total number of subjects: ");
 int n = in.nextInt();
 float w[]=new float[n+1];
 float p[]=new float[n+1];
 float ratio[]=new float[n+1];
-System.out.println("Enter the weight of each item: ");
 for(i=1;i<=n;i++)
-w[i] = in.nextFloat();
-System.out.println("Enter the profit of each item: ");
+{
+    System.out.println("Enter the time to study subject "+i+"(in hrs): ");
+    w[i] = in.nextFloat();
+}
 for(i=1;i<=n;i++)
-p[i] = in.nextFloat();
-System.out.println("Enter the knapsack capacity: ");
+{
+    System.out.println("Enter the no of times in which "+i+"subject questions are repeated:");
+    p[i] = in.nextFloat();
+}
+System.out.println("Enter the total time left to study: ");
 int m= in.nextInt();
 for(i=1;i<=n;i++)
 ratio[i]=p[i]/w[i];
-System.out.println("Information about knapsack problem are");
 displayinfo(n,w,p,ratio);
-System.out.println("Capacity = "+m);
+System.out.println("Time left(in hrs) = "+m+"\n");
 sortArray(n,ratio,w,p);
-System.out.println("\nDetails after sorting items based on
-Profit/Weight ratio in descending order: ");
+System.out.println("\nDetails after sorting items based on hrs/repeat ratio in descending order: ");
 displayinfo(n,w,p,ratio);
 knapsack(m,n,w,p);
-System.out.println("*************************************");
+System.out.println("*************");
 }
 static void displayinfo(int n,float w[],float p[],float ratio[])
 {
-System.out.println("ITEM\tWEIGHT\tPROFIT\tRATIO(PROFIT/WEIGHT)");
+System.out.println("ITEM\tHRS\tREPEAT\tRATIO(HRS/REPEAT)");
 for(int i=1; i<=n; i++)
 System.out.println(i+"\t"+w[i]+"\t"+p[i]+"\t"+ratio[i]);
 }
@@ -75,17 +74,17 @@ if(w[i]>u)
 break;
 else
 {
-}
-}
 x[i]=1;
 tp=tp+p[i];
 u=(int) (u-w[i]);
+}
+}
 if(i<n)
 x[i]=u/w[i];
 tp=tp+(x[i]*p[i]);
-System.out.println("\nThe result is = ");
+System.out.println("\nYou can cover(check acc to new table):\n");
 for(i=1; i<=n; i++)
 System.out.print("\t"+x[i]);
-System.out.println("\nMaximum profit is = "+tp);
-}
+System.out.println("\nYou can cover "+tp+" subjects to get maximum marks in give time\n");
+    }
 }
